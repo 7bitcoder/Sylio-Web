@@ -5,6 +5,10 @@ https://github.com/7bitcoder/Sylio
 
 ## Run local demo
 
+
+https://user-images.githubusercontent.com/27222695/226721240-2be52886-fe47-4c3f-b68e-2371f5aedf02.mp4
+
+
 ### Requirements docker & docker-compose
 
 - clone repository
