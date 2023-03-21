@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  database_identity:
+    env_file: .env
+    extends:
+      file: ../../Database/database.yml
+      service: database_identity
+
+  identity:
+    env_file: .env
+    extends:
+      file: ../../Identity/identity.yml
+      service: identity
+    depends_on:
+      - database_identity
+
+  database_app:
+    env_file: .env
+    extends:
+      file: ../../Database/database.yml
+      service: database_app
+    ports:
+      - 5432:5432
+
+  weapi:
+    env_file: .env
+    extends:
+      file: ../../Backend/backend.yml
+      service: weapi
+    depends_on:
+      - database_app
+      - identity
+
+volumes:
+  database_identity_volume:
+    driver: local
+  database_app_volume:
+    driver: local

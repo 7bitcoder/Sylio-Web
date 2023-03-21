@@ -1,0 +1,17 @@
+<mat-checkbox
+  [disabled]="blockedPowerUps.disabled"
+  [checked]="allChecked"
+  [indeterminate]="intermediante"
+  (change)="toggleCheck($event.checked)"
+>
+</mat-checkbox>
+<mat-selection-list #list [disabled]="blockedPowerUps.disabled">
+  <mat-list-option *ngFor="let type of powerUpTypes" [value]="type">
+    <div class="option">
+      <img class="icon" [src]="type | powerUpIcon" alt="" />
+      <span>
+        {{ type | powerUpName }}
+      </span>
+    </div>
+  </mat-list-option>
+</mat-selection-list>

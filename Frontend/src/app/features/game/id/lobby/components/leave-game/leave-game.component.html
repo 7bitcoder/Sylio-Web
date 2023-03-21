@@ -1,0 +1,9 @@
+<mat-card appearance="outlined" class="card">
+  <mat-card-content class="content">
+    <ng-container *ngIf="thisPlayer$ | async as player">
+      <button (click)="leave(player)" mat-icon-button matTooltip="Leave Game">
+        <mat-icon> keyboard_backspace </mat-icon>
+      </button>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

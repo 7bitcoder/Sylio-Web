@@ -1,0 +1,44 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 5rem;
+  line-height: normal;
+}
+.table {
+  min-width: 70rem;
+}
+
+.inner-table {
+  width: 100%;
+}
+
+.empty-results {
+  padding: 2rem;
+  text-align: center;
+}
+
+tr.row.mat-mdc-row {
+  cursor: pointer;
+
+  &:hover,
+  & .expanded-row {
+  }
+}
+
+.detail {
+  overflow: hidden;
+  display: flex;
+}
+
+tr.detail-row.mat-mdc-row {
+  height: 0;
+
+  &:hover {
+  }
+}

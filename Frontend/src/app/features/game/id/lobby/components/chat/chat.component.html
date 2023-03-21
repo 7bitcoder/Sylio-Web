@@ -1,0 +1,32 @@
+<mat-card appearance="outlined" class="card">
+  <mat-card-header>
+    <mat-card-title>Chat</mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content class="chat-window">
+    <div #messagesRef class="messages">
+      <span #messageRef class="message" *ngFor="let message of messages">
+        <span class="player"> {{ message.user }}:</span>
+        <span class="text"> {{ message.message }}</span>
+      </span>
+    </div>
+    <mat-form-field class="text-input" subscriptSizing="dynamic">
+      <mat-label>Send Message</mat-label>
+      <textarea
+        #messageText
+        matInput
+        placeholder="Message"
+        (keyup.enter)="sendMessage(messageText)"
+        [disabled]="disabled$ | async"
+      ></textarea>
+    </mat-form-field>
+    <button
+      class="send-btn"
+      mat-button
+      (click)="sendMessage(messageText)"
+      [disabled]="disabled$ | async"
+    >
+      Send
+    </button>
+  </mat-card-content>
+</mat-card>

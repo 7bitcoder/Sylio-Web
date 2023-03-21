@@ -1,0 +1,24 @@
+<mat-card appearance="outlined" class="card">
+  <mat-card-content class="content">
+    <ng-container *ngIf="game$ | async as game">
+      <button (click)="delete(game)" mat-icon-button matTooltip="Delete Game">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <div class="spacer"></div>
+      <span
+        [matTooltipDisabled]="enoughPlayers$ | async"
+        matTooltip="Not enough players To start game"
+      >
+        <button
+          [disabled]="notEnoughPlayers$ | async"
+          (click)="start(game)"
+          mat-icon-button
+          matTooltip="Start Game"
+        >
+          <mat-icon>start</mat-icon>
+        </button>
+      </span>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

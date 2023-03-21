@@ -1,0 +1,31 @@
+<mat-card appearance="outlined" class="card">
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item
+        *ngFor="let player of players$ | async"
+        role="listitem"
+        [class.thisPlayer]="player.thisPlayer"
+      >
+        <div class="player">
+          <div class="color" [style.background]="player.colour"></div>
+          <span
+            *ngIf="player.name | truncate : 20 as truncated"
+            class="name"
+            [matTooltipDisabled]="!truncated.isTruncated"
+            [matTooltip]="truncated.originalText"
+          >
+            {{ truncated.truncatedText }}
+          </span>
+
+          <span>
+            {{ player.points }}
+          </span>
+
+          <mat-icon *ngIf="!player.connected" matTooltip="Player disconnected"
+            >warning</mat-icon
+          >
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

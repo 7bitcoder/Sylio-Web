@@ -1,0 +1,8 @@
+<mat-card appearance="outlined" class="card">
+  <div class="content">
+    <div class="center-info" *ngIf="startRound$ | async">
+      <app-messages></app-messages>
+    </div>
+    <canvas class="canvas" #canvas> </canvas>
+  </div>
+</mat-card>

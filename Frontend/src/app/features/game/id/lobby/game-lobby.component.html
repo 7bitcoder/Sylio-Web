@@ -1,0 +1,11 @@
+<div class="left">
+  <app-leave-game *ngIf="thisPlayer$ | async"></app-leave-game>
+  <app-players class="players"></app-players>
+</div>
+
+<app-create-edit-view-game class="middle"></app-create-edit-view-game>
+
+<div class="right">
+  <app-admin-controls *ngIf="isAdmin$ | async"></app-admin-controls>
+  <app-chat class="chat"></app-chat>
+</div>

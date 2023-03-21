@@ -1,0 +1,50 @@
+.card {
+  height: 100%;
+}
+
+.chat-window {
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1 1;
+  overflow: auto;
+}
+
+.text-input {
+  width: 100%;
+}
+
+.messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  overflow: auto;
+
+  .message {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    .player {
+      font-weight: bold;
+    }
+
+    .text {
+      overflow-wrap: anywhere;
+    }
+
+    &:hover {
+      box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+    }
+  }
+}
+
+.send-btn {
+  align-self: flex-end;
+}

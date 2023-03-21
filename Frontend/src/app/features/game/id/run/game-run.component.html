@@ -1,0 +1,13 @@
+<app-connecting
+  class="connecting"
+  *ngIf="notConnected$ | async"
+></app-connecting>
+
+<div class="left">
+  <app-round></app-round>
+  <app-game-players class="players"></app-game-players>
+</div>
+
+<div class="right">
+  <app-game-board></app-game-board>
+</div>

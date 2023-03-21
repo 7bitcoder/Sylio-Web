@@ -1,0 +1,101 @@
+<mat-form-field class="search">
+  <mat-label>Game Title</mat-label>
+  <mat-icon matPrefix>search</mat-icon>
+  <input
+    #title
+    matInput
+    placeholder="Search"
+    ngModel
+    (ngModelChange)="this.search.next(title.value)"
+  />
+  <button
+    *ngIf="title.value"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="title.value = ''; this.search.next(title.value)"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+<div class="mat-elevation-z8 table">
+  <ng-container *ngIf="result$ | async as result">
+    <table
+      mat-table
+      *ngIf="result.value?.games"
+      [dataSource]="result.value?.games!"
+      [fixedLayout]="true"
+    >
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef>Created</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="!result.loading">
+            {{ element.created | dateAsAgo }}
+          </span>
+          <ngx-skeleton-loader *ngIf="result.loading"></ngx-skeleton-loader>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="!result.loading">
+            {{ element.title }}
+          </span>
+          <ngx-skeleton-loader *ngIf="result.loading"></ngx-skeleton-loader>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="players">
+        <th mat-header-cell *matHeaderCellDef>Players</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="!result.loading">
+            {{ element.players }} / {{ element.maxPlayers }}
+          </span>
+          <ngx-skeleton-loader *ngIf="result.loading"></ngx-skeleton-loader>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="roundsNumber">
+        <th mat-header-cell *matHeaderCellDef>Rounds</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="!result.loading">
+            {{ element.roundsNumber }}
+          </span>
+          <ngx-skeleton-loader *ngIf="result.loading"></ngx-skeleton-loader>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="inGame">
+        <th mat-header-cell *matHeaderCellDef>In Game</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="!result.loading">
+            <mat-icon *ngIf="element.state == GameState.Running"
+              >check</mat-icon
+            >
+            <mat-icon *ngIf="element.state == GameState.WaitingForPlayers"
+              >close</mat-icon
+            >
+          </span>
+          <ngx-skeleton-loader *ngIf="result.loading"></ngx-skeleton-loader></td
+      ></ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="navigate(row)"
+      ></tr>
+
+      <tr *matNoDataRow>
+        <td colspan="5" class="empty-results">Didn't found any games</td>
+      </tr>
+    </table>
+  </ng-container>
+  <mat-paginator
+    [length]="gamesCount$ | async"
+    [pageSize]="defaultPageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page of games"
+  ></mat-paginator>
+</div>

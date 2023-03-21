@@ -1,0 +1,24 @@
+version: "3.4"
+
+services:
+  identity:
+    image: quay.io/keycloak/keycloak:21.0.1
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: database_identity
+      DB_DATABASE: ${DATABASE_IDENTITY_NAME}
+      DB_USER: ${DATABASE_IDENTITY_USER}
+      DB_SCHEMA: public
+      DB_PASSWORD: ${DATABASE_IDENTITY_PASSWORD}
+      KEYCLOAK_ADMIN: ${IDENTITY_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${IDENTITY_ADMIN_PASSWORD}
+      KEYCLOAK_FRONTEND_URL: ${IDENTITY_URL}
+    ports:
+      - ${IDENTITY_PORT}:8080
+    volumes:
+      - ./conf:/opt/keycloak/conf
+      - ${IDENTITY_REALMS_DIR}:/opt/keycloak/data/import
+      - ./themes:/opt/keycloak/themes
+    command:
+      - start-dev
+      - --import-realm

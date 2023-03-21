@@ -1,0 +1,76 @@
+<mat-card class="card" appearance="outlined" *ngIf="mode$ | async as mode">
+  <mat-card-header>
+    <ng-container [ngSwitch]="mode">
+      <mat-card-title *ngSwitchCase="Mode.Edit">Edit Game</mat-card-title>
+      <mat-card-title *ngSwitchCase="Mode.Create">Create Game</mat-card-title>
+      <mat-card-title *ngSwitchCase="Mode.View">Game</mat-card-title>
+      <mat-card-title *ngSwitchDefault></mat-card-title>
+    </ng-container>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="form" (ngSubmit)="submit(mode)">
+      <mat-form-field class="field">
+        <mat-label>Game Title</mat-label>
+        <input
+          #title
+          formControlName="title"
+          matInput
+          [minlength]="VALIDATION_VALUES.title.min"
+          [maxlength]="VALIDATION_VALUES.title.max"
+          placeholder="Game Title"
+        />
+        <mat-hint align="end"
+          >{{ title.value.length }} /
+          {{ VALIDATION_VALUES.title.max }}</mat-hint
+        >
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>Rounds</mat-label>
+        <input
+          type="number"
+          formControlName="rounds"
+          matInput
+          [min]="VALIDATION_VALUES.rounds.min"
+          [max]="VALIDATION_VALUES.rounds.max"
+          placeholder="Rounds"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>Max Players</mat-label>
+        <input
+          type="number"
+          formControlName="maxPlayers"
+          matInput
+          [min]="VALIDATION_VALUES.maxPlayers.min"
+          [max]="VALIDATION_VALUES.maxPlayers.max"
+          placeholder="Max Players"
+        />
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="isPublic" labelPosition="before"
+        >Public</mat-slide-toggle
+      >
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Power Ups Settings </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <app-power-ups [blockedPowerUps]="blockedPowerUps"></app-power-ups>
+      </mat-expansion-panel>
+
+      <button
+        *ngIf="mode !== Mode.View"
+        class="submit"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Save
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

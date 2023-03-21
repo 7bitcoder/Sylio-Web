@@ -1,0 +1,78 @@
+<span class="title">Game Statistics</span>
+
+<div class="mat-elevation-z8 table">
+  <ng-container *ngIf="basicStats$ | async as stats">
+    <table mat-table [dataSource]="stats!" multiTemplateDataRows>
+      <ng-container
+        matColumnDef="{{ column }}"
+        *ngFor="let column of columnNames; let last = last"
+      >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ displayedColumns[column] }}
+        </th>
+        <ng-container *ngIf="last">
+          <td mat-cell *matCellDef="let element">
+            <mat-icon>{{
+              element.expanded ? "expand_less" : "expand_more"
+            }}</mat-icon>
+          </td>
+        </ng-container>
+
+        <ng-container *ngIf="!last">
+          <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+        </ng-container>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="columnNames.length"
+        >
+          <div
+            class="detail"
+            [@detailExpand]="element.expanded ? 'expanded' : 'collapsed'"
+          >
+            <div class="inner-table" *ngIf="element.expanded">
+              <table mat-table [dataSource]="element.roundStats" matSort>
+                <ng-container
+                  matColumnDef="{{ innerColumn }}"
+                  *ngFor="let innerColumn of innerColumnNames"
+                >
+                  <th mat-header-cell *matHeaderCellDef>
+                    {{ innerDisplayColumns[innerColumn] }}
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element[innerColumn] }}
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="innerColumnNames"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: innerColumnNames"
+                ></tr>
+              </table>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnNames"></tr>
+      <tr
+        mat-row
+        *matRowDef="let element; columns: columnNames"
+        class="row"
+        (click)="element.expanded = !element.expanded"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="detail-row"
+      ></tr>
+
+      <tr *matNoDataRow>
+        <td colspan="5" class="empty-results">Didn't found stats</td>
+      </tr>
+    </table>
+  </ng-container>
+</div>

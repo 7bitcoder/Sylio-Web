@@ -1,0 +1,15 @@
+.navbar-indicator {
+  position: fixed;
+  z-index: 5000;
+}
+
+.navbar {
+  width: 100vw;
+  height: var(--top-bar-height);
+  position: fixed;
+  z-index: 1000;
+}
+
+main {
+  padding-top: var(--top-bar-height);
+}

@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+  weapi:
+    build:
+      context: ./
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${WEBAPI_ASPNETCORE_ENVIRONMENT}
+      CONNECTIONSTRINGS__DEFAULT: Server=database_app;Port=5432;Database=${DATABASE_APP_NAME};User Id=${DATABASE_APP_USER};Password=${DATABASE_APP_PASSWORD}
+      FRONTEND__URL: ${FRONTEND_URL}
+      KEYCLOAK__AUTH-SERVER-URL: http://identity:8080
+      KEYCLOAK__REALM: ${IDENTITY_REALM}
+      KEYCLOAK__RESOURCE: ${IDENTITY_BACKEND_CLIENT}
+    ports:
+      - ${WEBAPI_PORT}:5200

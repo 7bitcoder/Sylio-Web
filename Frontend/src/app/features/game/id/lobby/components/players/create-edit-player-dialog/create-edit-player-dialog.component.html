@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>
+  {{ edit ? "Edit Player Name And Color" : "Pick Player Name And Color" }}
+</h1>
+<div mat-dialog-content cdkTrapFocus>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Player Name</mat-label>
+      <input
+        formControlName="name"
+        #playerName
+        matInput
+        cdkFocusInitial
+        [minlength]="VALIDATION_VALUES.name.min"
+        [maxlength]="VALIDATION_VALUES.name.max"
+      />
+      <mat-hint align="end"
+        >{{ playerName.value.length }} /
+        {{ VALIDATION_VALUES.name.max }}</mat-hint
+      >
+    </mat-form-field>
+
+    <color-circle
+      [colors]="COLORS"
+      [color]="color"
+      (onChange)="setColor($event)"
+    ></color-circle>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button *ngIf="edit" (click)="cancel()">Cancel</button>
+  <button mat-button (click)="save()" [disabled]="form.invalid">Ok</button>
+</div>

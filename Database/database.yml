@@ -1,0 +1,20 @@
+version: "3.4"
+
+services:
+  database_identity:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: ${DATABASE_IDENTITY_NAME}
+      POSTGRES_USER: ${DATABASE_IDENTITY_USER}
+      POSTGRES_PASSWORD: ${DATABASE_IDENTITY_PASSWORD}
+    volumes:
+      - database_identity_volume:/var/lib/postgresql/data
+
+  database_app:
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: ${DATABASE_APP_NAME}
+      POSTGRES_USER: ${DATABASE_APP_USER}
+      POSTGRES_PASSWORD: ${DATABASE_APP_PASSWORD}
+    volumes:
+      - database_app_volume:/var/lib/postgresql/data

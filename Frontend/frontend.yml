@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  frontend:
+    build:
+      context: ./
+    environment:
+      API_URL: ${WEBAPI_URL}
+      IDENTITY_URL: ${IDENTITY_URL}
+      IDENTITY_REALM: ${IDENTITY_REALM}
+      IDENTITY_CLIENT_ID: ${IDENTITY_FRONTEND_CLIENT}
+    ports:
+      - ${FRONTEND_PORT}:80

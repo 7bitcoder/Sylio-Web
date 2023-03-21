@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 1rem = 10px
+
+  // @media only screen and (max-width: $bp-large) {
+  //   font-size: 50%;
+  // }
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(75, 75, 75),
+    rgb(48, 47, 47)
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+
+  min-height: 100vh;
+}

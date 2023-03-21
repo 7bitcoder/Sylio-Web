@@ -1,0 +1,27 @@
+.card {
+  height: 100%;
+
+  mat-list-item {
+    padding-right: 0;
+  }
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  .color {
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-right: 1rem;
+  }
+
+  .name {
+  }
+
+  .edit-name {
+    width: 9rem;
+  }
+}

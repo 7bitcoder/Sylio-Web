@@ -1,0 +1,48 @@
+<mat-card appearance="outlined" class="card">
+  <mat-card-header>
+    <mat-card-title>Players ({{ playersNumber$ | async }}) </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item
+        *ngFor="let player of players$ | async"
+        role="listitem"
+        [class.thisPlayer]="player.thisPlayer"
+      >
+        <div class="player">
+          <div class="color" [style.background]="player.colour"></div>
+          <mat-icon *ngIf="player.gameAdmin">star</mat-icon>
+          <span
+            *ngIf="player.name | truncate : 20 as truncated"
+            class="name"
+            [matTooltipDisabled]="!truncated.isTruncated"
+            [matTooltip]="truncated.originalText"
+          >
+            {{ truncated.truncatedText }}
+          </span>
+
+          <ng-container *ngIf="thisPlayerAdmin$ | async">
+            <button
+              matTooltip="Kick player"
+              matTooltipShowDelay="500"
+              *ngIf="!player.thisPlayer"
+              (click)="kickPlayer(player)"
+              mat-icon-button
+            >
+              <mat-icon>block</mat-icon>
+            </button>
+          </ng-container>
+          <button
+            matTooltip="Edit player"
+            matTooltipShowDelay="500"
+            *ngIf="player.thisPlayer"
+            (click)="editPlayer(player)"
+            mat-icon-button
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

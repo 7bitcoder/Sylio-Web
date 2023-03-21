@@ -1,0 +1,56 @@
+<mat-toolbar color="primary" class="navbar">
+  <a mat-button routerLink="/home">
+    <span class="logo">Sylio Web</span>
+  </a>
+  <span class="spacer"></span>
+
+  <ng-container *ngIf="auth.initialized$ | async">
+    <ng-container *ngIf="auth.isLoggedIn$ | async; else loginT">
+      <a
+        mat-icon-button
+        color="basic"
+        routerLink="/game/list"
+        matTooltip="Search Games"
+      >
+        <mat-icon>search</mat-icon>
+      </a>
+      <a
+        mat-icon-button
+        color="basic"
+        routerLink="/game/new"
+        matTooltip="Create New Game"
+      >
+        <mat-icon>add</mat-icon>
+      </a>
+
+      <button
+        mat-icon-button
+        color="basic"
+        [matMenuTriggerFor]="accountMenu"
+        matTooltip="Account"
+      >
+        <mat-icon>person</mat-icon>
+      </button>
+      <mat-menu #accountMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+
+    <ng-template #loginT>
+      <button mat-button (click)="login()">Login</button>
+
+      <button mat-button (click)="register()">Register</button>
+    </ng-template>
+  </ng-container>
+</mat-toolbar>
