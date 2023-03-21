@@ -52,7 +52,7 @@ public class PowerUpsManager : IPowerUpsManager
 
     public void Clear()
     {
-        _powerUps.Clear();
+        _nextPowerUpTime = TimeSpan.Zero;
         _powerUps.Clear();
         _updates.Clear();
     }
