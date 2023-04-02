@@ -3,6 +3,15 @@
 Web version of this project
 https://github.com/7bitcoder/Sylio
 
+## Tech stack
+
+- PostgreSql
+- Asp.net core
+- Docker
+- Keycloak
+- Nswag
+- Angular
+
 ## Run local demo
 
 ### Requirements docker & docker-compose
